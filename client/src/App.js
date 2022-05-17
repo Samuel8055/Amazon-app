@@ -1,5 +1,6 @@
 import './App.css';
 import { data } from './data';
+import { Product } from './components'
 
 const App = () => {
   return (
@@ -18,34 +19,7 @@ const App = () => {
         <div className="row center">
           {
             data.products.map(product => (
-              <div className="card" key={product._id}>
-                <a href={`/product/${product._id}`}>
-                  <img src={product.image} alt={product.name} className="medium" />
-                </a>
-                <div className="card-body">
-                  <a href={`/product/${product._id}`}>
-                    <h2>{product.name}</h2>
-                  </a>
-                  <div className="rating">
-                    <span>
-                      <i className="fa fa-star"></i>
-                    </span>
-                    <span>
-                      <i className="fa fa-star"></i>
-                    </span>
-                    <span>
-                      <i className="fa fa-star"></i>
-                    </span>
-                    <span>
-                      <i className="fa fa-star"></i>
-                    </span>
-                    <span>
-                      <i className="fa fa-star"></i>
-                    </span>
-                  </div>
-                  <div className="price">${product.price}</div>
-                </div>
-              </div>
+              <Product product={product} key={product._id} />
             ))
           }
         </div>
