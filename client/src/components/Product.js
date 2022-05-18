@@ -1,6 +1,5 @@
 import Ratings from "./Ratings";
 
-
 const Product = ({ product }) => {
   return (
     <div className="card" key={product._id}>
