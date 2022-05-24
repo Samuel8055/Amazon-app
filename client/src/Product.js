@@ -1,15 +1,15 @@
-
+import { Link } from 'react-router-dom'
 
 const Product = ({ product }) => {
   return (
     <div className="card" key={product._id}>
-      <a href={`/product/${product._id}`}>
+      <Link to={`/product/${product._id}`}>
         <img src={product.image} alt={product.name} className="medium" />
-      </a>
+      </Link>
       <div className="card-body">
-        <a href={`/product/${product._id}`}>
+        <Link to={`/product/${product._id}`}>
           <h2>{product.name}</h2>
-        </a>
+        </Link>
         <div className="rating">
           <span>
             <i className="fa fa-star"></i>

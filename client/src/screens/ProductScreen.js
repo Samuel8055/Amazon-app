@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Loader, Message, Ratings } from "../components";
 import { getProduct } from "../redux/actions/productActions"
+import { addToCart } from "../redux/actions/cartActions"
 
 const ProductScreen = () => {
   let { id } = useParams();
@@ -20,7 +21,8 @@ const ProductScreen = () => {
   if (!product) return <div>Product not found!</div>
 
   const addToCartHandler = () => {
-    return navigate(`/cart/${id}?qty=${qty}`, { replace: true })
+    dispatch(addToCart(id, qty))
+    navigate(`/cart/${id}?qty=${qty}`, { replace: true })
   }
 
   return (

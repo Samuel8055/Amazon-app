@@ -43,3 +43,4 @@ export const getProductReducer = (state = { loading: true, product: {} }, action
       return state
   }
 }
+
