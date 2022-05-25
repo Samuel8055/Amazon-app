@@ -1,24 +1,26 @@
-import express from 'express';
-import data from './data.js';
+const express = require('express')
+const mongoose = require('mongoose')
+const dotenv = require('dotenv')
+const userRouter = require('./routes/userRoutes')
+const productRouter = require('./routes/productRoutes')
 
+dotenv.config();
 const app = express();
 
-app.get("/api/products/:id", (req, res) => {
-  const product = data.products.find(item => item._id === req.params.id)
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('Database connection successful.'))
+  .catch((err) => console.log(`Database connection error! ${err}`))
 
-  if (!product) {
-    res.status(404).send({ message: "Product not found!" })
-  } else {
-    res.json(product)
-  }
+// Routes middleware
+app.use('/api/users', userRouter)
+app.use('/api/products', productRouter)
+
+// All errors in the routes will be handled and thrown by this middleware when expressAsyncHandler is used.
+app.use((err, req, res, next) => {
+  res.status(500).send({ message: err.message })
 })
 
-app.get('/api/products', (req, res) => {
-  res.json(data.products);
-})
-
-const port = process.env.PORT || 5000;
-
-app.listen(port, () => {
+app.listen(process.env.PORT, () => {
   console.log(`server running on port ${port}`)
 })

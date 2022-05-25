@@ -13,15 +13,15 @@ const HomeScreen = () => {
     dispatch(listProducts())
   }, [dispatch])
 
+  const renderProducts = products && products.length > 0 ? products.map(product => (
+    <Product product={product} key={product._id} />
+  )) : <Message variant="danger" message={products && products.message} />
 
   return (
     <div className="row center">
       {
         loading ? <Loader /> :
-          error ? <Message variant="danger" message={error} /> :
-            products.map(product => (
-              <Product product={product} key={product._id} />
-            ))
+          error ? <Message variant="danger" message={error} /> : renderProducts
       }
     </div>
   )
