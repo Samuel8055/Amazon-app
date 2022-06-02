@@ -6,6 +6,8 @@ const productRouter = require('./routes/productRoutes')
 
 dotenv.config();
 const app = express();
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI)
